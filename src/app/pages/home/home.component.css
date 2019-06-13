@@ -1,0 +1,15 @@
+.container {
+  padding: 2rem;
+  background-color: #3f51b5;
+  color: #efefef;
+}
+.container h1 {
+  margin-bottom: 2rem;
+}
+table {
+  width: 100%;
+  margin-top: 1rem;
+  @media (min-width: 768px) {
+    margin-top: 4rem;
+  }
+}
