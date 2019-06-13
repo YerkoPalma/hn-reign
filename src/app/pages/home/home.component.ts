@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
 import { distanceInWordsToNow } from 'date-fns';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 export interface FeedData {
   id: number;
@@ -21,7 +23,7 @@ export class HomeComponent implements OnInit {
   dataSource: MatTableDataSource<FeedData>;
   format = distanceInWordsToNow;
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
     const data: FeedData[] = [{
       id: 1,
       title: 'Example feed',
@@ -37,4 +39,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  openDialog() {
+    this.dialog.open(ConfirmComponent);
+  }
 }

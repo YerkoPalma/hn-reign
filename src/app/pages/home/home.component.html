@@ -20,7 +20,7 @@
   <ng-container matColumnDef="controls">
     <th mat-header-cell *matHeaderCellDef> Controls </th>
     <td mat-cell *matCellDef="let row">
-      <button mat-icon-button aria-label="Remove this feed">
+      <button (click)="openDialog()" mat-icon-button aria-label="Remove this feed">
         <mat-icon>delete</mat-icon>
       </button>
     </td>
