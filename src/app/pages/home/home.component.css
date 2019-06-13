@@ -13,3 +13,31 @@ table {
     margin-top: 4rem;
   }
 }
+.mat-header-row {
+  display: none;
+}
+.mat-row {
+  background-color: #fff;
+  border: 1pt #ccc;
+}
+
+.mat-row .title {
+  color: #333;
+  font-size: 13pt;
+}
+
+.mat-row .mat-column-controls {
+  color: transparent;
+}
+
+.mat-row:hover .mat-column-controls {
+  color: #333;
+}
+.mat-row .author {
+  color: #999;
+  font-size: 13pt;
+}
+
+.mat-row:hover {
+  background-color: #fafafa;
+}
