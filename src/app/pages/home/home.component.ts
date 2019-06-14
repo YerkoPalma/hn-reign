@@ -6,7 +6,7 @@ import { ConfirmComponent } from './confirm/confirm.component';
 import { FeedService } from './feed.service';
 
 export interface FeedData {
-  id: number;
+  _id: number;
   title: string;
   author: string;
   url: string;

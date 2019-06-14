@@ -46,7 +46,7 @@ class App {
       const { data } = await axios.get(HN_API);
       for (const hit of data.hits) {
         feeds.push({
-          id: hit.story_id,
+          _id: hit.story_id,
           title: hit.story_title || hit.title,
           url: hit.story_url || hit.url,
           author: hit.author,

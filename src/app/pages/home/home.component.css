@@ -17,10 +17,17 @@ table {
   display: none;
 }
 .mat-row {
+  position: relative;
   background-color: #fff;
   border: 1pt #ccc;
 }
 
+.mat-row a {
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
 .mat-row .title {
   color: #333;
   font-size: 13pt;
