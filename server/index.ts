@@ -5,9 +5,11 @@ import * as mongodb from 'mongodb';
 import * as cors from 'cors';
 import { FeedData } from '../src/app/pages/home/home.component';
 const { MongoClient } = mongodb;
+import axios from 'axios';
+
+const HN_API = 'http://hn.algolia.com/api/v1/search_by_date?query=nodejs';
 
 class App {
-
   constructor() {
     this.app = express();
     this.config()
@@ -34,30 +36,26 @@ class App {
     const router = express.Router();
 
     router.get('/api/feed', async (req: Request, res: Response) => {
-      // const data: FeedData[] = [{
-      //   id: 1,
-      //   title: 'Example feed',
-      //   url: '',
-      //   author: 'Yerko',
-      //   date: new Date(),
-      //   visible: true
-      // }];
-
       const data = await this.db.collection('feeds').find().toArray();
       res.status(200).send(data);
     });
 
     router.post('/api/feed', async (req: Request, res: Response) => {
-      const data: FeedData[] = [{
-        id: 1,
-        title: 'Example feed',
-        url: '',
-        author: 'Yerko',
-        date: new Date(),
-        visible: true
-      }];
-      // query a database and save data
-      await this.db.collection('feeds').insertMany(data);
+      const feeds: FeedData[] = [];
+      // query API
+      const { data } = await axios.get(HN_API);
+      for (const hit of data.hits) {
+        feeds.push({
+          id: hit.story_id,
+          title: hit.story_title || hit.title,
+          url: hit.story_url || hit.url,
+          author: hit.author,
+          date: new Date(hit.created_at),
+          visible: true
+        });
+      }
+      // and save data
+      await this.db.collection('feeds').insertMany(feeds);
       res.status(200).send(data);
     });
 
@@ -66,7 +64,6 @@ class App {
       console.log('Express server listening on port ' + this.port);
     });
   }
-
 }
 
 const app = App.bootstrap();
