@@ -7,6 +7,7 @@ import * as cors from 'cors';
 import { FeedData } from '../src/app/pages/home/home.component';
 const { MongoClient } = mongodb;
 import axios from 'axios';
+import * as path from 'path';
 
 const HN_API = 'http://hn.algolia.com/api/v1/search_by_date?query=nodejs';
 
@@ -24,12 +25,14 @@ class App {
   public static bootstrap(): App {
     return new App();
   }
+
   private async config(): Promise<void> {
     this.app.use(cors());
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(express.static(path.join(__dirname, '..', 'dist', 'hn-reign')));
     // connect to database
-    const client: mongodb.MongoClient = await MongoClient.connect('mongodb://localhost');
+    const client: mongodb.MongoClient = await MongoClient.connect(process.env.MONGODB_URI || 'mongodb://localhost');
     this.db = client.db('local');
   }
 
@@ -83,6 +86,11 @@ class App {
           $set: { visible: false }
         });
       res.status(200).send(result);
+    });
+
+    router.get('*', (req: Request, res: Response) => {
+      console.log('sending', req.url);
+      res.sendFile(path.join(__dirname, '..', 'dist', 'hn-reign', req.url));
     });
 
     this.app.use('/', router);
