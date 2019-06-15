@@ -20,7 +20,7 @@ class App {
 
   public app: express.Application;
   public db: mongodb.Db;
-  private port = 9090;
+  private port = process.env.PORT || 9090;
 
   public static bootstrap(): App {
     return new App();
