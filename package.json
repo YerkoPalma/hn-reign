@@ -3,12 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "npm-run-all -p client server",
+    "dev": "npm-run-all -p client server",
     "client": "ng serve",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "server": "ts-node --project ./server/tsconfig.json ./server/index.ts",
+    "start": "ts-node --project ./server/tsconfig.json ./server/index.ts",
     "e2e": "ng e2e"
   },
   "private": true,
