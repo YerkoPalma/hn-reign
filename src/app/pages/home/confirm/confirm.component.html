@@ -2,7 +2,7 @@
 <div mat-dialog-content>
   Are you sure you want to remove this feed?
   <div class="dialog-buttons">
-    <button mat-button>Confirm</button>
-    <button mat-button>Cancel</button>
+    <button mat-button (click)="deleteFeed(data.feedId)">Confirm</button>
+    <button mat-button mat-dialog-close>Cancel</button>
   </div>
 </div>

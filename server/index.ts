@@ -73,6 +73,18 @@ class App {
       res.status(200).send(feeds);
     });
 
+    // _delete_
+    router.put('/api/feed', async (req: Request, res: Response) => {
+      const { feedID } = req.body;
+
+      const { result } = await this.db.collection('feeds').updateOne(
+        { _id: feedID },
+        {
+          $set: { visible: false }
+        });
+      res.status(200).send(result);
+    });
+
     this.app.use('/', router);
     this.app.listen(this.port, () => {
       console.log('Express server listening on port ' + this.port);

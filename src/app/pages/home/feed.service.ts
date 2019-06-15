@@ -19,4 +19,9 @@ export class FeedService {
         map(feeds => feeds as FeedData[])
       );
   }
+
+  deleteFeed(feedID: number): Observable<void> {
+    return this.http
+      .put<any>(environment.endpoint.feed, { feedID });
+  }
 }

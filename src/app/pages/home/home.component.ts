@@ -35,10 +35,19 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.feedService
       .getFeeds()
-      .subscribe(feeds => this.dataSource.data = feeds);
+      .subscribe(feeds => this.dataSource.data = feeds.filter(feed => feed.visible));
   }
 
-  openDialog() {
-    this.dialog.open(ConfirmComponent);
+  deleteFeed(feedId: number) {
+    this.dataSource.data = this.dataSource.data.filter(feed => feed._id !== feedId);
+  }
+
+  openDialog(feedId: number) {
+    this.dialog.open(ConfirmComponent, {
+      data: {
+        feedId,
+        parent: this
+      }
+    });
   }
 }
