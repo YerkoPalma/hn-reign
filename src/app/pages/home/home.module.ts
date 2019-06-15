@@ -8,11 +8,16 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from '../home/home.component';
 import { ConfirmComponent } from './confirm/confirm.component';
+import { FeedService } from './feed.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [HomeComponent, ConfirmComponent],
   entryComponents: [
     ConfirmComponent
+  ],
+  providers: [
+    FeedService
   ],
   imports: [
     CommonModule,
@@ -20,7 +25,8 @@ import { ConfirmComponent } from './confirm/confirm.component';
     MatTableModule,
     MatButtonModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    HttpClientModule
   ]
 })
 export class HomeModule { }
