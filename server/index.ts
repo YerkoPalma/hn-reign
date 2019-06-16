@@ -33,7 +33,7 @@ class App {
     this.app.use(express.static(path.join(__dirname, '..', 'dist', 'hn-reign')));
     // connect to database
     const client: mongodb.MongoClient = await MongoClient.connect(process.env.MONGODB_URI || 'mongodb://localhost');
-    this.db = client.db('local');
+    this.db = client.db(process.env.MONGODB_DB || 'local');
   }
 
   private async updateFeeds(): Promise<FeedData[]> {
